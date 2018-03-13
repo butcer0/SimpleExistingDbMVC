@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using SimpleExistingDbMVC.Models;
 using System;
 using System.Collections.Generic;
@@ -10,15 +11,29 @@ namespace SimpleExistingDbMVC.Controllers
     public class ActorsController : Controller
     {
         private ActorDbContext _context;
+        private ILogger _logger;
 
-        public ActorsController(ActorDbContext context)
+        public ActorsController(ActorDbContext context, ILogger<ActorsController> logger)
         {
             _context = context;
+            _logger = logger;
         }
 
         public IActionResult Index()
         {
-            return View(_context.Actors.ToList());
+            try
+            {
+                var data = _context.Actors.ToList();
+                _logger.LogInformation("***Success hitting the Index page");
+                return View(_context.Actors.ToList());
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Failed to get records in the Index page: {ex.Message}");
+                throw;
+            }
+
+            
         }
 
         public IActionResult Create()
