@@ -1,0 +1,41 @@
+﻿@model SimpleExistingDbMVC.Models.Actors
+
+@{ 
+    ViewBag.Title = "New Actor";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form asp-controller="Actors" asp-action="Create" method="post" class="form-horizontal" role="form">
+    <div class="form-horizontal">
+        <div asp-validation-summary="All" class="text-danger"></div>
+
+        <!-- Name -->
+        <label asp-for="Name" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <!-- Age -->
+        <label asp-for="Age" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input asp-for="Age" class="form-control" />
+            <span asp-validation-for="Age" class="text-danger"></span>
+        </div>
+
+        <!-- AcademyWinner -->
+        <label asp-for="AcademyWinner" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input asp-for="AcademyWinner" class="form-control" />
+            <span asp-validation-for="AcademyWinner" class="text-danger"></span>
+        </div>
+
+        <!-- Create -->
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
